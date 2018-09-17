@@ -153,7 +153,7 @@ Deploy to Heroku
 ----------------
 Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications in a more robust way than via Cloud9. If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the next step.
 
-If using Cloud9, update your Heroku Toolbelt installation by typing the following command:
+If using Cloud9/Codio, update your Heroku Toolbelt installation by typing the following command:
 
 ```
 $ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh

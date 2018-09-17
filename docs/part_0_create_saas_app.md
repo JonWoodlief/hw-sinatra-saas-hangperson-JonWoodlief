@@ -22,7 +22,7 @@ Let's start with the following steps:
 
 ```rb
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.4.0'
 
 gem 'sinatra', '>= 1.4'
 ```
@@ -102,12 +102,10 @@ run MyApp
 
 The first line tells Rack that our app lives in the file `app.rb`, which you created above to hold your app's code.  We have to explicitly state that our `app` file is located in the current directory (.) because `require` normally looks only in standard system directories to find gems.
 
-If you're using Cloud9, you're now ready to test-drive our simple app with this command line:
+If you're using Cloud9/Codio, you're now ready to test-drive our simple app with this command line:
 
 ```sh
-$ bundle exec rackup -p $PORT -o $IP
-```
-[Available ports on a hosted Cloud9 workspace](https://docs.c9.io/docs/run-an-application)
+$ bundle exec rackup -p 3000 -o 0.0.0.0
 
 This command starts the Rack appserver and the WEBrick webserver.  Prefixing it with `bundle exec` ensures that you are running with the gems specified in `Gemfile.lock`.  Rack will look for `config.ru` and attempt to start our app based on the information there.  If you're using Cloud9, you will see a small popup in the terminal with a URL to your running webapp.  It will open in a new tab in the IDE if you click on it, but you should open up a fresh browser tab and paste in that URL.
 
@@ -145,9 +143,9 @@ end
 
 Any gem specifications inside the `group :development` block will only be examined if bundle is run in the development environment.  (The other environments you can specify are :test and :production, and you can define new environments yourself.)  Gem specifications outside of any group block are assumed to apply in all environments.
 
-Run `bundle`. Say `bundle exec rerun -- rackup -p $PORT -o $IP` in the terminal window to start your app and verify the app is running.  There are more details on rerun's usage available in the gem's [GitHub README](https://github.com/alexch/rerun#usage). Gem's are usually on GitHub and their README's full of helpful instructions about how to use them.
+Run `bundle`. Say `bundle exec rerun -- rackup -p 3000 -o 0.0.0.0` in the terminal window to start your app and verify the app is running.  There are more details on rerun's usage available in the gem's [GitHub README](https://github.com/alexch/rerun#usage). Gem's are usually on GitHub and their README's full of helpful instructions about how to use them.
 
-In this case we are prefixing with `bundle exec` again in order to ensure we are using the gems in the Gemfile.lock, and the `--` symbol is there to assert that the command we want rerun to operate with is `rackup -p $PORT -o $IP`.  We could achieve the same effect with `bundle exec rerun "rackup -p $PORT -o $IP"`.  They are equivalent.   More importantly any detected changes will now cause the server to restart automatically, similar to the use of `guard` to auto re-run specs when files change.
+In this case we are prefixing with `bundle exec` again in order to ensure we are using the gems in the Gemfile.lock, and the `--` symbol is there to assert that the command we want rerun to operate with is `rackup -p 3000 -o 0.0.0.0`.  We could achieve the same effect with `bundle exec rerun "rackup -p 3000 -o 0.0.0.0"`.  They are equivalent.   More importantly any detected changes will now cause the server to restart automatically, similar to the use of `guard` to auto re-run specs when files change.
 
 Modify `app.rb` to print a different message, and verify that the change is detected by rerun byagain refreshing your browser tab with the running app.  Also before we move on you should commit your latest changes to git.
 
@@ -170,12 +168,12 @@ Next, make sure you stage and commit all changes locally as instructed above (i.
 Earlier we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` to determine how to start your Sinatra app.  How do you tell a production environment how to start an appserver or other processes necessary to receive requests and start your app?  In the case of Heroku, this is done with a special file named `Procfile`,  which specifies one or more types of Heroku processes your app will use, and how to start each one. The most basic Heroku process type is called a Dyno, or "web worker".  One Dyno can serve one user request at a time.  Since we're on Heroku's free tier, we can only have one Dyno. Let's create a file named `Procfile`, and only this as the name (i.e. Procfile.txt is not valid). Write the following line in your `Procfile`:
 
 ```
-web: bundle exec rackup config.ru -p $PORT
+web: bundle exec rackup config.ru -p 3000
 ```
 
 This tells Heroku to start a single web worker (Dyno) using essentially the same command line you used to start Rack locally. Note that in some cases, a `Procfile` is not necessary since Heroku can infer from your files how to start the app. However, it's always better to be explicit.  
 
-Your local Cloud9 repo is now ready to deploy to Heroku:
+Your local Cloud9/Codio repo is now ready to deploy to Heroku:
 
 ```
 $ git push heroku master

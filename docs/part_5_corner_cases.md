@@ -21,7 +21,7 @@ Submission Instructions
 -----------------------
 When all scenarios are passing, deploy to Heroku and submit the URL of your deployed game. **Note:** Make sure the Heroku URL does not begin with `https` or with `http`, or you may get a socket error message. For example, if your app name on heroku is 'dragon-4582', then the proper Heroku URL would be 'dragon-4582.herokuapp.com' with nothing else.
 
-IMPORTANT!!! The file that you will submit to the autograder MUST be ASCII encoded. If you do not know what this means then please create your text file in cloud9 using the `echo` command like this:
+IMPORTANT!!! The file that you will submit to the autograder MUST be ASCII encoded. If you do not know what this means then please create your text file in cloud9/codio using the `echo` command like this:
 
 ```
 echo 'my-app-12345.herokuapp.com' > hw3.txt

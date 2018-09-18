@@ -7,7 +7,7 @@ Hangperson: a scaffolded (!) ESaaS getting-started assignment
 
 In this assignment you'll be introduced to part of the basic cycle of creating SaaS in a disciplined way.
 
-**NOTE: This repository contains a .codio file, this file needs to be moved outside of your repository directory and into the workspace directory**
+~~**NOTE: This repository contains a .codio file, this file needs to be moved outside of your repository directory and into the workspace directory**~~
 
 
 Learning Goals

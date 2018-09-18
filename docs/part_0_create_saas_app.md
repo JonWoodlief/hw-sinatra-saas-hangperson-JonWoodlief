@@ -5,6 +5,11 @@ Part 0: Demystifying SaaS app creation
 
 **What you will do:** Create a simple "hello world" app using the Sinatra framework, version it properly, and deploy it to Heroku.
 
+**NOTE and WARNING:** The work you do here in Part 0 does *not* use the repo and `hw-sinatra-saas-hangperson` directory you just
+got via GitHub Classroom. In this Part 0 you’ll create an entirely
+new directory to use with this part, just to get you familiar with the components of an SaaS
+application. So do not use your hw-sinatra-saas-hangperson dir for Part 0.
+
 Creating and versioning a simple SaaS app
 -----------------------------------------
 
@@ -14,9 +19,23 @@ We have two mechanisms for keeping the development and production environments c
 
 Happily, Ruby has a wonderful system for managing gem dependencies: a gem called **Bundler** looks for a file called `Gemfile` in the *app root directory* of each project.  The `Gemfile` contains a list of gems and versions your app depends on. Bundler verifies that those gems, and any others that they in turn depend on, are properly installed on your system and accessible to the app.
 
-Let's start with the following steps: **(NOTE: These steps are not necessary when using GitHub Classroom.)**
+Let's start with the following steps: 
+**(NOTE: Make sure you are in your `~/workspace` directory when you issue the next few commands.)**
 
-* Create a new empty directory to hold your new app, and use `git init` in that directory to start versioning it with Git. (WARNING: Do not run `git init` in your top level directory, only use it in the folder you just created.)
+* Create a new empty directory to hold your new app, and use `git init` in that directory to start versioning it with Git. 
+The commands below, on each line after the `$`, create a directory, change into the new directory, and initialize Git.
+(WARNING: Do not run `git init` in your top level directory, only use it in the folder you just created.)
+
+```sh
+~/workspace$
+~/workspace$ mkdir part0
+~/workspace$ cd part0/
+~/workspace/part0$ git init
+Initialized empty Git repository in /home/codio/workspace/part0/.git/
+:~/workspace/part0$
+```
+
+If you did anything wrong above -- especially if you did not issue the `git init` command in your new directory, stop now and get help!
 
 * In that directory, create a new file called `Gemfile` (the capitalization is important) with the following contents.  This file will be a permanent part of your app and will travel with your app anywhere it goes:
 
@@ -45,7 +64,7 @@ $ git add .
 $ git commit -m "Set up the Gemfile"
 ```
 
-The first command stages all changed files for committing. The second command commits the staged files with the comment in the quotes. You can repeat these commands to commit future changes. Remember that these are LOCAL commits -- if you want these changes on GitHub, you'll need to do a git push command, which we will show later.
+The first command stages all changed files for committing. The second command commits the staged files with the comment in the quotes. You can repeat these commands to commit future changes. Remember that these are LOCAL commits -- if you want these changes on GitHub, you'll need to do a `git push` command, which we will show later.
 
 #### Self Check Questions (click triangle to check your answer)
 
@@ -106,6 +125,7 @@ If you're using Cloud9/Codio, you're now ready to test-drive our simple app with
 
 ```sh
 $ bundle exec rackup -p 3000 -o 0.0.0.0
+```
 
 This command starts the Rack appserver and the WEBrick webserver.  Prefixing it with `bundle exec` ensures that you are running with the gems specified in `Gemfile.lock`.  Rack will look for `config.ru` and attempt to start our app based on the information there.  If you're using Cloud9, you will see a small popup in the terminal with a URL to your running webapp.  It will open in a new tab in the IDE if you click on it, but you should open up a fresh browser tab and paste in that URL. If you are using Codio, there is a dropdown menu at the top of the screen that says 'Project Index', click the arrow beside the text and select 'Box URL' from the menu. This will open the webpage in a new tab.
 
@@ -129,7 +149,7 @@ Modify `app.rb` so that instead of "Hello World" it prints "Goodbye World". Save
 
 No changes? Confused?
 
-Now go back to the shell window where you ran `rackup` and press Ctrl-C to stop Rack.  Then type `bundle exec rackup -p 3000 -o 0.0.0.0` again (for Cloud9/Codio), and once it is running, go back to your browser tab with your app and refresh the page.  This time it should work.
+Now go back to the shell window where you ran `rackup` and press Ctrl-C to stop Rack.  Then type `bundle exec rackup -p 3000 -o 0.0.0.0` again (for Codio), and once it is running, go back to your browser tab with your app and refresh the page.  This time it should work.
 
 What this shows you is that if you modify your app while it's running, you have to restart Rack in order for it to "see" those changes.  Since restarting it manually is tedious, we'll use the `rerun` gem, which restarts Rack automatically when it sees changes to files in the app's directory. (Rails does this for you by default during development, as we'll see, but Sinatra doesn't.)
 
@@ -147,11 +167,11 @@ Run `bundle`. Say `bundle exec rerun -- rackup -p 3000 -o 0.0.0.0` in the termin
 
 In this case we are prefixing with `bundle exec` again in order to ensure we are using the gems in the Gemfile.lock, and the `--` symbol is there to assert that the command we want rerun to operate with is `rackup -p 3000 -o 0.0.0.0`.  We could achieve the same effect with `bundle exec rerun "rackup -p 3000 -o 0.0.0.0"`.  They are equivalent.   More importantly any detected changes will now cause the server to restart automatically, similar to the use of `guard` to auto re-run specs when files change.
 
-Modify `app.rb` to print a different message, and verify that the change is detected by rerun byagain refreshing your browser tab with the running app.  Also before we move on you should commit your latest changes to git.
+Modify `app.rb` to print a different message, and verify that the change is detected by `rerun` by again refreshing your browser tab with the running app.  Also before we move on you should commit your latest changes to git.
 
 Deploy to Heroku
 ----------------
-Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications in a more robust way than via Cloud9. If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the next step.
+Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications in a more robust way than via Cloud9/Codio. If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the next step.
 
 If using Cloud9/Codio, update your Heroku Toolbelt installation by typing the following command:
 
@@ -159,11 +179,11 @@ If using Cloud9/Codio, update your Heroku Toolbelt installation by typing the fo
 $ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 ```
 
-Log in to your Heroku account by typing the command: `heroku login` in the Cloud9 terminal. This will connect your Cloud9 workspace to your Heroku account.
+Log in to your Heroku account by typing the command: `heroku login` in the Cloud9/Codio terminal. This will connect your Cloud9/Codio workspace to your Heroku account.
 
-While in the root directory of your project (not your whole workspace), type `heroku create` to create a new project in Heroku. This will tell the Heroku service to prepare for some incoming code, and locally on Cloud9, it will add a remote git repository for you called `heroku`.
+While in the root directory of your project (not your whole workspace), type `heroku create` to create a new project in Heroku. This will tell the Heroku service to prepare for some incoming code, and locally on Cloud9/Codio, it will add a remote git repository for you called `heroku`.
 
-Next, make sure you stage and commit all changes locally as instructed above (i.e. `git add`, `git commit`, etc).
+Next, **make sure you stage and commit all changes locally as instructed above** (i.e. `git add`, `git commit`, etc).
 
 Earlier we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` to determine how to start your Sinatra app.  How do you tell a production environment how to start an appserver or other processes necessary to receive requests and start your app?  In the case of Heroku, this is done with a special file named `Procfile`,  which specifies one or more types of Heroku processes your app will use, and how to start each one. The most basic Heroku process type is called a Dyno, or "web worker".  One Dyno can serve one user request at a time.  Since we're on Heroku's free tier, we can only have one Dyno. Let's create a file named `Procfile`, and only this as the name (i.e. Procfile.txt is not valid). Write the following line in your `Procfile`:
 
@@ -179,7 +199,7 @@ Your local Cloud9/Codio repo is now ready to deploy to Heroku:
 $ git push heroku master
 ```
 
-(`master` refers to which branch of the remote Heroku repo we are pushing to.  We'll learn about branches later in the course, but for now, suffice it to say that you can only deploy to the `master` branch on Heroku.) This push will create a running instance of your app at some URL ending with `herokuapp.com`. Enter that URL in a new browser tab (not in the Cloud9 IDE) to see your app running live. Congratulations, you did it--your app is live!
+(`master` refers to which branch of the remote Heroku repo we are pushing to.  We'll learn about branches later in the course, but for now, suffice it to say that you can only deploy to the `master` branch on Heroku.) This push will create a running instance of your app at some URL ending with `herokuapp.com`. Enter that URL in a new browser tab (*not* in the Cloud9/Codio IDE) to see your app running live. Congratulations, you did it--your app is live!
 
 Summary
 -------

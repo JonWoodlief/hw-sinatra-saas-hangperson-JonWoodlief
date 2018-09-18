@@ -10,7 +10,7 @@ got via GitHub Classroom. In this Part 0 you’ll create an entirely
 new directory to use with this part, just to get you familiar with the components of an SaaS
 application. So do not use your hw-sinatra-saas-hangperson dir for Part 0.
 
-**Additional Setup Step:** NOTE: The repository for this assignment contains a `.codio` file; this file needs to be moved to your top-level working directory in Codio. (I.e., it needs to be moved to your `~\workspace` directory.) You can use either the Filetree pane, or a terminal command, in Codio to do this. If the `codio` file already exists, it's fine to overwrite it. Get help if you're not sure what to do.
+~~**Additional Setup Step:** NOTE: The repository for this assignment contains a `.codio` file; this file needs to be moved to your top-level working directory in Codio. (I.e., it needs to be moved to your `~\workspace` directory.) You can use either the Filetree pane, or a terminal command, in Codio to do this. If the `codio` file already exists, it's fine to overwrite it. Get help if you're not sure what to do.~~
 
 Creating and versioning a simple SaaS app
 -----------------------------------------
@@ -129,7 +129,7 @@ If you're using Cloud9/Codio, you're now ready to test-drive our simple app with
 $ bundle exec rackup -p 3000 -o 0.0.0.0
 ```
 
-This command starts the Rack appserver and the WEBrick webserver.  Prefixing it with `bundle exec` ensures that you are running with the gems specified in `Gemfile.lock`.  Rack will look for `config.ru` and attempt to start our app based on the information there.  ~~If you're using Cloud9, you will see a small popup in the terminal with a URL to your running webapp.  It will open in a new tab in the IDE if you click on it, but you should open up a fresh browser tab and paste in that URL.~~ If you are using Codio, there is a dropdown menu at the top of the screen that says 'Project Index', click the arrow beside the text and select 'Box URL' from the menu. This will open the webpage in a new tab. **If this isn't working, make sure you have updated your `.codio` file,** as described at the start of Part 0 above.
+This command starts the Rack appserver and the WEBrick webserver.  Prefixing it with `bundle exec` ensures that you are running with the gems specified in `Gemfile.lock`.  Rack will look for `config.ru` and attempt to start our app based on the information there.  ~~If you're using Cloud9, you will see a small popup in the terminal with a URL to your running webapp.  It will open in a new tab in the IDE if you click on it, but you should open up a fresh browser tab and paste in that URL.~~ If you are using Codio, there is a dropdown menu at the top of the screen that says 'Project Index', click the arrow beside the text and select 'Box URL' from the menu. This will open the webpage in a new tab. ~~**If this isn't working, make sure you have updated your `.codio` file,** as described at the start of Part 0 above.~~
 
 ~~Point a new Web browser tab at the running app's URL and verify that you can see "Hello World".~~
 

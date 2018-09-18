@@ -30,7 +30,7 @@ echo 'my-app-12345.herokuapp.com' > hw3.txt
 Note that the auto-grader expects the URL to be of a specific form - the URL in the text file should contain neither http:// nor https://. If you run the `cat` command after creating the file like this:
 
 ```
-cat hw2.txt
+cat hw3.txt
 ```
 
 then the output should look like this:

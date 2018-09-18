@@ -5,7 +5,7 @@ With all this machinery in mind, clone this repo into Cloud9, and let's work on 
 
 ```sh
 $ cd ~/workspace
-$ git clone https://github.com/hw-sinatra-saas-hangperson-<***YOUR GITHUB USERNAME HERE***>
+$ git clone https://github.com/UNCC-ITSC-3155-F18/hw-sinatra-saas-hangperson-<***YOUR GITHUB USERNAME HERE***>
 $ cd hw-sinatra-saas-hangperson
 $ bundle
 ```

@@ -136,7 +136,7 @@ This command starts the Rack appserver and the WEBrick webserver.  Prefixing it 
 #### Self Check Question
 
 <details>
-  <summary>What happens if you try to visit a non-root URL such as <code>https://workspace-username.c9.io/hello</code> and why? (your URL root will vary)</summary>
+  <summary>What happens if you try to visit a non-root URL such as <code>https://workspace-name-3000.codio.io/hello</code> and why? (your URL root will vary)</summary>
   <p><blockquote> You'll get a humorous error message from the Sinatra framework, since you don't have a route matching <code>get '/hello'</code> in your app.  Since Sinatra is a SaaS framework, the error message is packaged up in a Web page and delivered to your browser.</blockquote></p>
 </details>
 

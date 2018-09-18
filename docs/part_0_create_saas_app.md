@@ -14,7 +14,7 @@ We have two mechanisms for keeping the development and production environments c
 
 Happily, Ruby has a wonderful system for managing gem dependencies: a gem called **Bundler** looks for a file called `Gemfile` in the *app root directory* of each project.  The `Gemfile` contains a list of gems and versions your app depends on. Bundler verifies that those gems, and any others that they in turn depend on, are properly installed on your system and accessible to the app.
 
-Let's start with the following steps:
+Let's start with the following steps: **(NOTE: These steps are not necessary when using GitHub Classroom.)**
 
 * Create a new empty directory to hold your new app, and use `git init` in that directory to start versioning it with Git. (WARNING: Do not run `git init` in your top level directory, only use it in the folder you just created.)
 
@@ -107,7 +107,7 @@ If you're using Cloud9/Codio, you're now ready to test-drive our simple app with
 ```sh
 $ bundle exec rackup -p 3000 -o 0.0.0.0
 
-This command starts the Rack appserver and the WEBrick webserver.  Prefixing it with `bundle exec` ensures that you are running with the gems specified in `Gemfile.lock`.  Rack will look for `config.ru` and attempt to start our app based on the information there.  If you're using Cloud9, you will see a small popup in the terminal with a URL to your running webapp.  It will open in a new tab in the IDE if you click on it, but you should open up a fresh browser tab and paste in that URL.
+This command starts the Rack appserver and the WEBrick webserver.  Prefixing it with `bundle exec` ensures that you are running with the gems specified in `Gemfile.lock`.  Rack will look for `config.ru` and attempt to start our app based on the information there.  If you're using Cloud9, you will see a small popup in the terminal with a URL to your running webapp.  It will open in a new tab in the IDE if you click on it, but you should open up a fresh browser tab and paste in that URL. If you are using Codio, there is a dropdown menu at the top of the screen that says 'Project Index', click the arrow beside the text and select 'Box URL' from the menu. This will open the webpage in a new tab.
 
 Point a new Web browser tab at the running app's URL and verify that you can see "Hello World".
 
@@ -129,7 +129,7 @@ Modify `app.rb` so that instead of "Hello World" it prints "Goodbye World". Save
 
 No changes? Confused?
 
-Now go back to the shell window where you ran `rackup` and press Ctrl-C to stop Rack.  Then type `bundle exec rackup -p $PORT -o $IP` again (for Cloud9), and once it is running, go back to your browser tab with your app and refresh the page.  This time it should work.
+Now go back to the shell window where you ran `rackup` and press Ctrl-C to stop Rack.  Then type `bundle exec rackup -p 3000 -o 0.0.0.0` again (for Cloud9/Codio), and once it is running, go back to your browser tab with your app and refresh the page.  This time it should work.
 
 What this shows you is that if you modify your app while it's running, you have to restart Rack in order for it to "see" those changes.  Since restarting it manually is tedious, we'll use the `rerun` gem, which restarts Rack automatically when it sees changes to files in the app's directory. (Rails does this for you by default during development, as we'll see, but Sinatra doesn't.)
 
@@ -168,7 +168,7 @@ Next, make sure you stage and commit all changes locally as instructed above (i.
 Earlier we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` to determine how to start your Sinatra app.  How do you tell a production environment how to start an appserver or other processes necessary to receive requests and start your app?  In the case of Heroku, this is done with a special file named `Procfile`,  which specifies one or more types of Heroku processes your app will use, and how to start each one. The most basic Heroku process type is called a Dyno, or "web worker".  One Dyno can serve one user request at a time.  Since we're on Heroku's free tier, we can only have one Dyno. Let's create a file named `Procfile`, and only this as the name (i.e. Procfile.txt is not valid). Write the following line in your `Procfile`:
 
 ```
-web: bundle exec rackup config.ru -p 3000
+web: bundle exec rackup config.ru -p $PORT
 ```
 
 This tells Heroku to start a single web worker (Dyno) using essentially the same command line you used to start Rack locally. Note that in some cases, a `Procfile` is not necessary since Heroku can infer from your files how to start the app. However, it's always better to be explicit.  

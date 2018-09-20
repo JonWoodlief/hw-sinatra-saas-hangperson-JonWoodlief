@@ -198,6 +198,8 @@ This tells Heroku to start a single web worker (Dyno) using essentially the same
 Your local Cloud9/Codio repo is now ready to deploy to Heroku:
 
 ```
+$ git add .
+$ git commit -m "Added Procfile"
 $ git push heroku master
 ```
 
